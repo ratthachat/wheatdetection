@@ -23,10 +23,10 @@ class train_wheat(Dataset):
     def __getitem__(self, index: int):
         image_id = self.image_ids[index]
         p_ratio = random.random()
-        if self.test or p_ratio > 0.6:
+        if self.test or p_ratio > 0.8:
             image, boxes = self.load_image_and_boxes(index)
         else:
-            if p_ratio < 0.2:
+            if p_ratio < 0.8:
                 image, boxes = self.load_mosaic_image_and_boxes(index)
             elif p_ratio < 0.4:
                 image, boxes = self.load_image_and_bboxes_with_cutmix(index)
