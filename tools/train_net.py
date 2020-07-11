@@ -39,6 +39,7 @@ def train(cfg, logger):
     fitter = Fitter(model=model, device=device, cfg=cfg, train_loader=train_loader, val_loader=val_loader, logger=logger)
     if check:
         fitter.load(f'{cfg.OUTPUT_DIR}/last-checkpoint.bin')
+        print('load ',f'{cfg.OUTPUT_DIR}/last-checkpoint.bin')
     fitter.fit()
 
 def main():
