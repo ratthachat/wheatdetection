@@ -62,6 +62,7 @@ class train_wheat(Dataset):
     def load_image_and_boxes(self, index):
         image_id = self.image_ids[index]
         image = cv2.imread(f'{self.root}/train/{image_id}.jpg', cv2.IMREAD_COLOR)
+        image = cv2.resize(image,(1024,1024))
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB).astype(np.float32)
         image /= 255.0
         records = self.marking[self.marking['image_id'] == image_id]
