@@ -6,7 +6,8 @@ from torchvision.ops import misc as misc_nn_ops
 from torchvision.models._utils import IntermediateLayerGetter
 import sys
 sys.path.insert(0, "./external/pytorch-image-models")
-from timm.models.resnest import resnest101e
+sys.path.insert(0, "./external/pytorch-image-models/timm")
+from models.resnest import resnest101e
 
 class BackboneWithFPN(nn.Module):
     """
@@ -48,9 +49,7 @@ def resnet_fpn_backbone(backbone_name, pretrained, norm_layer=misc_nn_ops.Frozen
         norm_layer=norm_layer)
     """
     Constructs a specified ResNet backbone with FPN on top. Freezes the specified number of layers in the backbone.
-
     Examples::
-
         >>> from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
         >>> backbone = resnet_fpn_backbone('resnet50', pretrained=True, trainable_layers=3)
         >>> # get some dummy image
@@ -64,7 +63,6 @@ def resnet_fpn_backbone(backbone_name, pretrained, norm_layer=misc_nn_ops.Frozen
         >>>    ('2', torch.Size([1, 256, 4, 4])),
         >>>    ('3', torch.Size([1, 256, 2, 2])),
         >>>    ('pool', torch.Size([1, 256, 1, 1]))]
-
     Arguments:
         backbone_name (string): resnet architecture. Possible values are 'ResNet', 'resnet18', 'resnet34', 'resnet50',
              'resnet101', 'resnet152', 'resnext50_32x4d', 'resnext101_32x8d', 'wide_resnet50_2', 'wide_resnet101_2'
